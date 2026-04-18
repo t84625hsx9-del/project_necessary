@@ -20,7 +20,15 @@ with st.sidebar:
 start_n, end_n = (n1, n2) if vert == "Сверху" else (n2, n1)
 y_dir = 1 if vert == "Сверху" else -1
 x_side = -1 if side == "Слева" else 1
+if vert == "Сверху":
+    start_n, end_n = n1, n2
+    text_top, text_bottom = f"n1={n1}", f"n2={n2}"
+else:  # vert == "Снизу"
+    start_n, end_n = n2, n1
+    text_top, text_bottom = f"n1={n1}", f"n2={n2}" # Текст аннотаций должен отражать, какой n сверху, какой снизу
 
+y_dir = 1 if vert == "Сверху" else -1
+x_side = -1 if side == "Слева" else 1
 # --- 2. ВЫЧИСЛЕНИЯ ---
 alpha_rad = np.radians(angle_deg)
 sin_beta = (start_n * np.sin(alpha_rad)) / end_n
@@ -74,7 +82,16 @@ def get_arc_path(start_deg, end_deg, radius=0.3):
 
 # --- 3. ВИЗУАЛИЗАЦИЯ PLOTLY ---
 fig = go.Figure()
-
+fig.add_annotation(
+    x=-1, y=0.8,
+    text=f"<b>{text_top}</b>", # Верхняя среда
+    showarrow=False, font=dict(size=16)
+)
+fig.add_annotation(
+    x=-1, y=-0.8,
+    text=f"<b>{text_bottom}</b>", # Нижняя среда
+    showarrow=False, font=dict(size=16)
+)
 # --- 1. РАСЧЕТ БЕТА (СИНХРОННО ДЛЯ ГРАФИКА И МАТЕМАТИКИ) ---
 # --- 1. РАСЧЕТ БЕТА (ГРАДУСЫ) ---
 # --- 1. РАСЧЕТ УГЛА БЕТА (ДЛЯ ДУГИ) ---
