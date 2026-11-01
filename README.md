@@ -42,25 +42,6 @@ cd project_necessary
 
 Откроется в браузере на localhost. Остановить - Ctrl+C в терминале.
 
-## Как убедиться, что физика верная
-
-Обычных тестов здесь нет: физика живёт в рисунках, а не в возвращаемых
-значениях. Поэтому проверки устроены иначе. Заглушка Streamlit исполняет
-страницу без браузера, подставляя значения ползунков, а скрипт сверяет
-построенные фигуры с эталоном, посчитанным **независимо от кода страницы**:
-период маятника - с рядом Бернулли, движение - с законом сохранения энергии,
-лучи - с формулой тонкой линзы, поле кольца - с потоком магнита-диполя.
-
-```
-cd project_necessary
-.venv/bin/python checks/verify_mechanics.py
-.venv/bin/python checks/verify_optics.py
-.venv/bin/python checks/verify_refraction.py
-.venv/bin/python checks/verify_magnetism.py
-```
-
-Каждая печатает «проверок не прошло: 0». Подробности - в
-[project_necessary/checks/README.md](project_necessary/checks/README.md).
 
 ## Что где лежит
 
